@@ -3,16 +3,29 @@
     {
       "id": "47b50k",
       "title": "Feed the cat",
-      "completed": true
+      "completed": true,
+      "archived": false
     },
     {
       "id": "t5sx9k",
       "title": "Take a shower",
-      "completed": false
+      "completed": false,
+      "archived": false
     },
     {
-      "id": "kt2sw5",
       "title": "Learn React",
+      "id": "kt2sw5",
+      "completed": false,
+      "archived": false
+    },
+    {
+      "id": "yjf2oe",
+      "title": "Have a fun :)",
+      "completed": true
+    },
+    {
+      "id": "l32f7",
+      "title": "Do something",
       "completed": false
     }
   ]

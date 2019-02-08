@@ -19,11 +19,11 @@ export default class Form extends Component {
 
     render() {
         return (
-            <form className="input-group mb-3" onSubmit={this.handleSubmit}>
+            <form className="form-group col-md-8 input-group mb-3" onSubmit={this.handleSubmit}>
                 <input type="text"
                        name="title"
                        className="form-control"
-                       placeholder="Add new task"
+                       placeholder="Add new task..."
                        value={this.state.title}
                        onChange={this.onChange}/>
                     <div className="input-group-append">

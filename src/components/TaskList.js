@@ -3,6 +3,9 @@ import axios from 'axios';
 
 import Task from './Task';
 import Form from './Form';
+import Search from './Search';
+
+const databaseUrl = 'http://localhost:3000/';
 
 export default class TaskList extends Component {
 
@@ -11,7 +14,7 @@ export default class TaskList extends Component {
     };
 
     getTasks() {
-        axios.get('http://localhost:3000/tasks')
+        axios.get(databaseUrl + 'tasks/')
             .then((response) => {
                 this.setState({
                     tasks: response.data
@@ -20,22 +23,27 @@ export default class TaskList extends Component {
     }
 
     addTask = (task) => {
-        axios.post('http://localhost:3000/tasks/', {
-            id: task.id,
-            title: task.title,
-            completed: task.completed
-        }).then(() => {
-            this.getTasks()
-        });
-        // this.setState({
-        //     tasks: [task, ...this.state.tasks]
-        // })
+        axios.post(databaseUrl + 'tasks/', task)
+            .then(() => {
+                this.getTasks()
+            });
     };
 
-    toggleComplete = (task) => {
-        axios.put('http://localhost:3000/tasks/' + task.id, {
-            id: task.id,
-            title: task.title,
+    filterTasks(value) {
+        axios.get(databaseUrl + 'tasks/')
+            .then((response) => {
+                return response.data.filter((task) => task.title.search(value) > 0);
+            })
+            .then((filteredTasks) => {
+                this.setState({
+                    tasks: filteredTasks
+                })
+            });
+    };
+
+    handleComplete = (task) => {
+        axios.put(databaseUrl + 'tasks/' + task.id, {
+            ...task,
             completed: !task.completed
         }).then(() => {
             this.getTasks()
@@ -43,7 +51,7 @@ export default class TaskList extends Component {
     };
 
     handleDelete = (id) => {
-        axios.delete('http://localhost:3000/tasks/' + id)
+        axios.delete(databaseUrl + 'tasks/' + id)
             .then(() => {
                 this.getTasks()
             });
@@ -53,14 +61,17 @@ export default class TaskList extends Component {
         const taskElements = this.state.tasks.map(task =>
             <li key={task.id} className="list-group-item">
                 <Task task={task}
-                      toggleComplete={() => this.toggleComplete(task)}
+                      toggleComplete={() => this.handleComplete(task)}
                       deleteTask={() => this.handleDelete(task.id)}
                 />
             </li>
         );
         return (
             <div>
-                <Form onSubmit={this.addTask}/>
+                <div className="form-row">
+                    <Form onSubmit={this.addTask} />
+                    <Search onSubmit={this.filterTasks.bind(this)} />
+                </div>
                 <ul className="list-group">
                     {taskElements}
                 </ul>

@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
+
+const databaseUrl = 'http://localhost:3000/';
 
 export default class Editor extends Component {
 
@@ -8,25 +10,17 @@ export default class Editor extends Component {
     };
 
     getTask(id) {
-        axios.get('http://localhost:3000/tasks/' + id)
+        axios.get(databaseUrl + 'tasks/' + id)
             .then((response) => {
-                this.setState({
-                    id: response.data.id,
-                    title: response.data.title,
-                    completed: response.data.completed
-                });
+                this.setState(response.data);
             });
     }
 
-    onChange = (e) => this.setState({ title: e.target.value });
+    onChange = (e) => this.setState({title: e.target.value});
 
     handleSave = (e) => {
         e.preventDefault();
-        axios.put('http://localhost:3000/tasks/' + this.state.id, {
-            id: this.state.id,
-            title: this.state.title,
-            completed: this.state.completed
-        })
+        axios.put(databaseUrl + 'tasks/' + this.state.id, this.state)
             .then(() => {
                 this.props.history.push('/')
             });
