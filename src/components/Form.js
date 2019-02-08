@@ -29,7 +29,7 @@ export default class Form extends Component {
                     <div className="input-group-append">
                         <button className="btn btn-outline-secondary"
                                 type="submit">
-                            Button
+                            ADD NEW TASK
                         </button>
                     </div>
             </form>

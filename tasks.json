@@ -1,0 +1,19 @@
+{
+  "tasks": [
+    {
+      "id": "47b50k",
+      "title": "Feed the cat",
+      "completed": true
+    },
+    {
+      "id": "t5sx9k",
+      "title": "Take a shower",
+      "completed": false
+    },
+    {
+      "id": "kt2sw5",
+      "title": "Learn React",
+      "completed": false
+    }
+  ]
+}

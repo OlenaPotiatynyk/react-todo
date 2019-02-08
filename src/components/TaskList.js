@@ -1,46 +1,59 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
 import Task from './Task';
 import Form from './Form';
-import tasks from '../tasks';
 
 export default class TaskList extends Component {
+
     state = {
-        tasks: tasks
+        tasks: this.getTasks() || []
     };
+
+    getTasks() {
+        axios.get('http://localhost:3000/tasks')
+            .then((response) => {
+                this.setState({
+                    tasks: response.data
+                });
+            });
+    }
 
     addTask = (task) => {
-        this.setState({
-            tasks: [task, ...this.state.tasks]
-        })
+        axios.post('http://localhost:3000/tasks/', {
+            id: task.id,
+            title: task.title,
+            completed: task.completed
+        }).then(() => {
+            this.getTasks()
+        });
+        // this.setState({
+        //     tasks: [task, ...this.state.tasks]
+        // })
     };
 
-    toggleComplete = (id) => {
-        this.setState({
-            tasks: this.state.tasks.map(task => {
-                if (task.id === id) {
-                    return {
-                        ...task,
-                        completed: !task.completed
-                    }
-                } else {
-                    return task;
-                }
-            })
-        })
+    toggleComplete = (task) => {
+        axios.put('http://localhost:3000/tasks/' + task.id, {
+            id: task.id,
+            title: task.title,
+            completed: !task.completed
+        }).then(() => {
+            this.getTasks()
+        });
     };
 
     handleDelete = (id) => {
-        this.setState({
-            tasks: this.state.tasks.filter(task => task.id !== id)
-        })
+        axios.delete('http://localhost:3000/tasks/' + id)
+            .then(() => {
+                this.getTasks()
+            });
     };
 
     render() {
         const taskElements = this.state.tasks.map(task =>
             <li key={task.id} className="list-group-item">
                 <Task task={task}
-                      toggleComplete={() => this.toggleComplete(task.id)}
+                      toggleComplete={() => this.toggleComplete(task)}
                       deleteTask={() => this.handleDelete(task.id)}
                 />
             </li>

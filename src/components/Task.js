@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
+import { Link } from "react-router-dom";
 
 export default class Task extends Component {
-    edit = () => {
-        console.log('---', 'clicked');
-    };
 
     render() {
         const {task} = this.props;
@@ -14,15 +12,18 @@ export default class Task extends Component {
                        value={task.completed}
                        checked={task.completed}
                        onChange={this.props.toggleComplete}/>
-                <h2 className={task.completed ? 'checked' : ''}>
+                <h4 className={task.completed ? 'checked' : ''}>
                     {task.title}
-                </h2>
+                </h4>
                 <div className="btn-group">
-                    <button type="button" className="btn btn-outline-info" onClick={this.edit}>
-                        {'EDIT'}
+                    <Link to={/edit/ + task.id} className="btn btn-outline-info">
+                        EDIT
+                    </Link>
+                    <button type="button" className="btn btn-outline-secondary" onClick={this.props.archiveTask}>
+                        ARCHIVE
                     </button>
                     <button type="button" className="btn btn-outline-danger" onClick={this.props.deleteTask}>
-                        {'DELETE'}
+                        DELETE
                     </button>
                 </div>
             </div>
