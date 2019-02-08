@@ -9,23 +9,35 @@
     {
       "id": "t5sx9k",
       "title": "Take a shower",
-      "completed": false,
+      "completed": true,
       "archived": false
     },
     {
       "title": "Learn React",
       "id": "kt2sw5",
-      "completed": false,
+      "completed": true,
       "archived": false
     },
     {
-      "id": "yjf2oe",
       "title": "Have a fun :)",
+      "id": "yjf2oe",
       "completed": true
     },
     {
       "id": "l32f7",
       "title": "Do something",
+      "completed": false,
+      "archived": false
+    },
+    {
+      "id": "t3d3c7",
+      "title": "Go home",
+      "completed": false,
+      "archived": false
+    },
+    {
+      "title": "Here you are!",
+      "id": "3kxbw",
       "completed": false,
       "archived": false
     }

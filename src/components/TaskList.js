@@ -85,6 +85,9 @@ export default class TaskList extends Component {
                 <ul className="list-group">
                     {taskElements}
                 </ul>
+                <p className={taskElements.length > 0 ? "hide" : ""}>
+                    Your search did not match any tasks. Try one more time.
+                </p>
             </div>
         )
     }
