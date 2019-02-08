@@ -32,7 +32,7 @@ export default class TaskList extends Component {
     filterTasks(value) {
         axios.get(databaseUrl + 'tasks/')
             .then((response) => {
-                return response.data.filter((task) => task.title.search(value) > 0);
+                return response.data.filter((task) => task.title.search(value) >= 0);
             })
             .then((filteredTasks) => {
                 this.setState({
