@@ -50,6 +50,15 @@ export default class TaskList extends Component {
         });
     };
 
+    addToArchive = (task) => {
+        axios.put(databaseUrl + 'tasks/' + task.id, {
+            ...task,
+            archived: !task.archived
+        }).then(() => {
+            this.getTasks()
+        });
+    };
+
     handleDelete = (id) => {
         axios.delete(databaseUrl + 'tasks/' + id)
             .then(() => {
@@ -59,9 +68,10 @@ export default class TaskList extends Component {
 
     render() {
         const taskElements = this.state.tasks.map(task =>
-            <li key={task.id} className="list-group-item">
+            <li key={task.id} className={task.archived ? "hide" : "list-group-item"}>
                 <Task task={task}
                       toggleComplete={() => this.handleComplete(task)}
+                      archivate={() => this.addToArchive(task)}
                       deleteTask={() => this.handleDelete(task.id)}
                 />
             </li>

@@ -26,7 +26,8 @@
     {
       "id": "l32f7",
       "title": "Do something",
-      "completed": false
+      "completed": false,
+      "archived": false
     }
   ]
 }

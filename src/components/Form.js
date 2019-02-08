@@ -12,7 +12,8 @@ export default class Form extends Component {
         this.props.onSubmit({
             id: Math.random().toString(36).substring(7),
             title: this.state.title,
-            completed: false
+            completed: false,
+            archived: false
         });
         this.setState({ title: '' });
     };

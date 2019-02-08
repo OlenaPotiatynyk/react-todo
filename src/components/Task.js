@@ -15,15 +15,20 @@ export default class Task extends Component {
                 <h4 className={task.completed ? 'checked' : ''}>
                     {task.title}
                 </h4>
-                <div className="btn-group">
+                <div className={task.archived ? "hide" : "btn-group"}>
                     <Link to={/edit/ + task.id} className="btn btn-outline-info">
                         EDIT
                     </Link>
-                    <button type="button" className="btn btn-outline-secondary" onClick={this.props.archiveTask}>
+                    <button type="button" className="btn btn-outline-secondary" onClick={this.props.archivate}>
                         ARCHIVE
                     </button>
                     <button type="button" className="btn btn-outline-danger" onClick={this.props.deleteTask}>
                         DELETE
+                    </button>
+                </div>
+                <div className={task.archived ? "btn-group" : "hide"}>
+                    <button type="button" className="btn btn-outline-secondary" onClick={this.props.archivate}>
+                        GET FROM ARCHIVE
                     </button>
                 </div>
             </div>

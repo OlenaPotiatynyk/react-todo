@@ -5,6 +5,7 @@ import './../main.css';
 import Header from './Header';
 import TaskList from './TaskList';
 import Editor from './Editor';
+import Archive from './Archive';
 
 export default class App extends Component {
 
@@ -15,6 +16,7 @@ export default class App extends Component {
                     <Header/>
                     <Route exact path="/" component={TaskList} />
                     <Route path="/edit/:id" component={Editor} />
+                    <Route path="/archive" component={Archive} />
                 </div>
             </Router>
         )
